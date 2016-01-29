@@ -1,0 +1,25 @@
+<project name="common-exec">
+
+  <macrodef name="common-exec">
+    <attribute name="command" />
+    <sequential>
+
+      <condition property="shellcmd" value="cmd">
+        <os family="windows" />
+      </condition>
+      <property name="shellcmd" value="sh" />
+
+      <condition property="param" value="/c">
+        <os family="windows" />
+      </condition>
+      <property name="param" value="-c" />
+
+      <exec executable="${shellcmd}" failonerror="true">
+        <arg value="${param}" />
+        <arg value="@{command}" />
+      </exec>
+
+    </sequential>
+  </macrodef>
+
+</project>
